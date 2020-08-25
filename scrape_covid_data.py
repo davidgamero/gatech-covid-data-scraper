@@ -121,6 +121,8 @@ def write_covid_data_csv(csv_path):
     with open(csv_path, 'w') as csvfile:
         csvwriter = csv.writer(csvfile)
 
+        csvwriter.writerow(('date', 'cases'))
+
         for date in dates:
             csvwriter.writerow((date, date_2_num_cases[date]))
 
