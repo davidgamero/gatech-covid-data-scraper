@@ -6,6 +6,11 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+__pycache__
 
 # Generated data file
 gatech_covid_data.csv
+
+# Lambda deployment
+gatech-covid-data-lambda/
+gatech-covid-data-lambda.zip
