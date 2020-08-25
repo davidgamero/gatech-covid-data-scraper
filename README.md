@@ -26,5 +26,5 @@ The patterns currently recognized are
 1) Rows with a 'Position' value of 'Students (N)' where N is the number of cases, which I extracted with a regex capture group for the numeric contents of the parentheses
 2) Rows with a 'Position' value of 'Students' OR 'Various'. For these rows I use a regex search to find the first integer present in the 'Campus Impact' column as the number of cases. It would be nice to eventually check that there is only a single match and throw an error for manual review if there are multiple integers.
 
-## acknowledgements
+## Acknowledgements
 Shout out to [cjwichman](https://github.com/cjwichman/gatech_covid) for paving the way with their [gatech_covid](https://github.com/cjwichman/gatech_covid) repo
