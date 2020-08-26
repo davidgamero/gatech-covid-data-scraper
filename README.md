@@ -1,5 +1,5 @@
 # 😷 GATech COVID-19 Data Scraper
-
+Number of cases per day. As a CSV. Data as it should be. EZ to read.
 ## 🎬 Demo
 
 [Download the Current Data (updated hourly)](https://gatech-covid-19-data.s3.amazonaws.com/gatech_covid_data.csv)
@@ -30,7 +30,7 @@ A: I searched "gatech covid" on GitHub and only got one result which was in R by
 
 I believe that pandemic health data should be freely and easily accessible and wanted to make my own plots, so I decided to make a Python scraper implementation to better understand the data.
 
-My main improvements were automated extraction of case numbers for rows that are inconsistent in formatting ex: due to the [GATech Health Alert Site](https://health.gatech.edu/coronavirus/health-alerts)'s wildly inconsistent conventions 🤢 I used a series of Regular Expressions to parse for keywords and then extract integers using observed rules. All fuzzy extractions are printed to the command line for manual verification.
+My main improvements were automated extraction of case numbers aggregated by day even for rows that group cases. This was trickier than I expected for rows that differ in formatting ex: due to the [GATech Health Alert Site](https://health.gatech.edu/coronavirus/health-alerts)'s wildly inconsistent conventions 🤢 I used a series of Regular Expressions to parse for keywords and then extract integers using observed rules. All fuzzy extractions are printed to the command line for manual verification.
 
 The patterns currently recognized are 
 1) Rows with a 'Position' value of 'Students (N)' where N is the number of cases, which I extracted with a regex capture group for the numeric contents of the parentheses
