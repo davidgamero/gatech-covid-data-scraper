@@ -1,6 +1,16 @@
 # 😷 GATech COVID-19 Data Scraper
 
+## 🎬 Demo
+
+[Download the Current Data (updated hourly)](https://gatech-covid-19-data.s3.amazonaws.com/gatech_covid_data.csv)
+
+This is a link to a public S3 Object that gets updated hourly from a Lambda running this project's code. Feel free to use it for powering a dashboard or investigating the data yourself
+```
+https://gatech-covid-19-data.s3.amazonaws.com/gatech_covid_data.csv
+```
+
 ## 🏁 Getting Started
+For those who want to run the data scraper locally
 
 ```
 git clone git@github.com:davidgamero/gatech-covid-data-scraper.git
@@ -11,7 +21,7 @@ pip install -r requirements.txt
 ```
 python scrape_covid_data.py
 ```
-Data will be written to gatech_covid_data.csv
+Data will be written to `gatech_covid_data.csv`
 
 ## ℹ️ Project Info
 Q: Why did I make this?
