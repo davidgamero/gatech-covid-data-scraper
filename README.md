@@ -33,7 +33,7 @@ I believe that pandemic health data should be freely and easily accessible and w
 My main improvements were automated extraction of case numbers aggregated by day even for rows that group cases. This was trickier than I expected for rows that differ in formatting ex: due to the [GATech Health Alert Site](https://health.gatech.edu/coronavirus/health-alerts)'s wildly inconsistent conventions 🤢 I used a series of Regular Expressions to parse for keywords and then extract integers using observed rules. All fuzzy extractions are printed to the command line for manual verification.
 
 The patterns currently recognized are 
-1) Rows with a 'Position' value of 'Students (N)' where N is the number of cases, which I extracted with a regex capture group for the numeric contents of the parentheses
+1) Rows with a 'Position' value of 'Students (N)' or 'Various (N)' where N is the number of cases, which I extracted with a regex capture group for the numeric contents of the parentheses
 2) Rows with a 'Position' value of 'Students' OR 'Various'. For these rows I use a regex search to find the first integer present in the 'Campus Impact' column as the number of cases. It would be nice to eventually check that there is only a single match and throw an error for manual review if there are multiple integers.
 
 ## 💾 AWS Lambda -> S3

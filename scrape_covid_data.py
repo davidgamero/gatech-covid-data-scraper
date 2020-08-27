@@ -19,7 +19,7 @@ ROW_INDEX_POSITION = 1
 ROW_INDEX_LAST_ON_CAMPUS = 2
 ROW_INDEX_CAMPUS_IMPACT = 3
 
-RE_POSITION_STUDENTS_PAREN = re.compile('Students \(([0-9]+)\)')
+RE_POSITION_PAREN = re.compile('\(([0-9]+)\)')
 RE_INTEGERS = re.compile('([0-9]+)')
 
 
@@ -73,12 +73,12 @@ def write_covid_data_csv(csv_path):
         if(row_position in ['Staff', 'Staff member']):
             return 1
 
-        # 'Students (N)' format
-        re_position_students_paren = RE_POSITION_STUDENTS_PAREN.match(
+        # '(N)' format
+        re_position_paren = RE_POSITION_PAREN.search(
             row_position)
-        if(re_position_students_paren != None and re_position_students_paren.group(1) != None):
+        if(re_position_paren != None and re_position_paren.group(1) != None):
             # Extract the number between the parentheses
-            num_cases = int(re_position_students_paren.group(1))
+            num_cases = int(re_position_paren.group(1))
 
             print('{} Extracted {} cases from Position="{}"'.format(
                 row_date, num_cases, row_position))
