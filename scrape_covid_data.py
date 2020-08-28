@@ -105,6 +105,13 @@ def write_covid_data_csv(csv_path):
     for row in text_rows:
         date = row[ROW_INDEX_DATE]
 
+        # Replace multiple spaces with a single space
+        date = re.sub(' +', ' ', date)
+
+        # Strip non-ascii characters
+        # https://stackoverflow.com/questions/8689795/how-can-i-remove-non-ascii-characters-but-leave-periods-and-spaces-using-python
+        date = re.sub(r'[^\x00-\x7f]', r'', date)
+
         # Have we seen this date before? If not, initialize
         if date not in date_2_num_cases:
             date_2_num_cases[date] = 0
