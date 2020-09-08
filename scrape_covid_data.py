@@ -58,6 +58,17 @@ def write_covid_data_csv(csv_path):
     dates = []  # List of dates captured ordered descending
     date_2_num_cases = {}
 
+    extractions = [] # List of rows where a number of cases was extracted from the text
+    failed_rows = [] # List of rows that failed to be processed
+
+    def add_extraction(row_date,num_cases,extraction_type,source_text):
+        extractions.append({
+            'date': row_date,
+            'numCases': num_cases,
+            'extractionType': extraction_type,
+            'sourceText': source_text
+        })
+
     # Parse the number of covid cases from a given row
 
     def parse_num_cases(row):
@@ -73,13 +84,14 @@ def write_covid_data_csv(csv_path):
         if(row_position in ['Staff', 'Staff member']):
             return 1
 
-        # '(N)' format
+        # POSITION '(N)' format 
         re_position_paren = RE_POSITION_PAREN.search(
             row_position)
         if(re_position_paren != None and re_position_paren.group(1) != None):
             # Extract the number between the parentheses
             num_cases = int(re_position_paren.group(1))
 
+            add_extraction(row_date,num_cases,'POSITION N',row_position)
             print('{} Extracted {} cases from Position="{}"'.format(
                 row_date, num_cases, row_position))
             return num_cases
@@ -91,6 +103,7 @@ def write_covid_data_csv(csv_path):
             num_cases = int(re_integers.group(1))
 
             # Alert warning for possibly lossy extraction
+            add_extraction(row_date,num_cases,'IMPACT',row_campus_impact)
             print('{} Extracted {} cases from text:  \n "{}"\n'.format(
                 row_date, num_cases, row_campus_impact))
 
@@ -99,7 +112,7 @@ def write_covid_data_csv(csv_path):
         # Alert unhandled rows to add cases
         print('UNHANDLED ROW IGNORED')
         print('|'.join(row))
-        return 0
+        return -1
 
     # Parse case numbers and collapse on each date
     for row in text_rows:
@@ -117,8 +130,12 @@ def write_covid_data_csv(csv_path):
             date_2_num_cases[date] = 0
             dates.append(date)
 
-        # Add the number of new cases from this row
-        date_2_num_cases[date] += parse_num_cases(row)
+        # If the row was processed successfully
+        if(parse_num_cases(row) != -1):
+            # Add the number of new cases from this row
+            date_2_num_cases[date] += parse_num_cases(row)
+        else:
+            failed_rows.append(row)
 
     # Write to csv
     # Delete existing csv before writing a new one
@@ -136,6 +153,16 @@ def write_covid_data_csv(csv_path):
     print('Success! Scraped data for {} dates from {} to {}'.format(
         len(dates), dates[-1], dates[0]))
 
+    response = {
+        'failedRows': len(failed_rows),
+        'rows': len(rows),
+        'dates': len(dates),
+        'dateStart': dates[0],
+        'dateEnd': dates[-1],
+        'extractions': extractions
+    }
+
+    return response
 
 if __name__ == "__main__":
     write_covid_data_csv(COVID_DATA_CSV)
