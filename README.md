@@ -2,12 +2,15 @@
 Number of cases per day. As a CSV. Data as it should be. EZ to read.
 ## 🎬 Demo
 
-[Download the Current Data (updated hourly)](https://gatech-covid-19-data.s3.amazonaws.com/gatech_covid_data.csv)
+[⬇️ Download the Current Data (updated hourly)](https://gatech-covid-19-data.s3.amazonaws.com/gatech_covid_data.csv)
 
-This is a link to a public S3 Object that gets updated hourly from a Lambda running this project's code. Feel free to use it for powering a dashboard or investigating the data yourself
+[📈 View the data in an interactive Chart and Table](https://davidgamero.github.io/gatech-covid-chart/)
+
+Below is the link to a public S3 Object that gets updated hourly from a Lambda running this project's code. Feel free to use it for powering a dashboard or investigating the data yourself
 ```
 https://gatech-covid-19-data.s3.amazonaws.com/gatech_covid_data.csv
 ```
+
 
 ## 🏁 Getting Started
 For those who want to run the data scraper locally
