@@ -24,6 +24,7 @@ RE_INTEGERS = re.compile('([0-9]+)')
 
 RE_YEAR = re.compile(',[ ]+([0-9]{2,5})')
 MIN_ROW_YEAR = 2020
+MAX_ROW_YEAR = 2030
 
 
 def write_covid_data_csv(csv_path):
@@ -99,7 +100,7 @@ def write_covid_data_csv(csv_path):
         row_campus_impact = cleanText(row[ROW_INDEX_CAMPUS_IMPACT])
 
         # Verify valid date years
-        if(getYearInt(row_date) < MIN_ROW_YEAR):
+        if(getYearInt(row_date) < MIN_ROW_YEAR or getYearInt(row_date) > MAX_ROW_YEAR):
             print('INVALID DATE ROW IGNORED')
             print('|'.join(row))
             return -1
